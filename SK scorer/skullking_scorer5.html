@@ -11,81 +11,92 @@
         body {
             font-family: sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 10px; /* Réduit le padding général pour les petits écrans */
             background-color: #f4f4f4;
             color: #333;
             /* FILIGRANE PIRATE - ASSUREZ-VOUS QUE LE NOM DU FICHIER EST CORRECT */
             background-image: url('pirate_filigrane.png'); 
-            background-repeat: repeat;
+            background-repeat: no-repeat;
             background-attachment: fixed;
-            background-size: 700px;
-            opacity: 0.95; /* Légère opacité pour ne pas masquer le texte */
+            background-size: 950px;
+            opacity: 0.95; 
         }
         .container {
             max-width: 600px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95); /* Fond légèrement transparent pour laisser voir le filigrane */
-            padding: 20px;
+            background: rgba(255, 255, 255, 0.95); 
+            padding: 15px; /* Réduit le padding du conteneur */
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             position: relative;
         }
         h1, h2, h3 {
-            color: #d9534f; /* Rouge pirate */
+            color: #d9534f; 
             text-align: center;
+            margin-top: 10px; /* Marge réduite */
         }
         /* ---------------------------------------------------- */
         /* ÉLÉMENTS D'INTERFACE */
         /* ---------------------------------------------------- */
         button, .player-name-input, input[type="number"], .input-field {
-            padding: 10px;
+            padding: 12px 10px; /* Padding vertical légèrement augmenté pour le toucher */
             margin: 5px 0;
             width: 100%;
             box-sizing: border-box;
             border: 1px solid #ccc;
             border-radius: 4px;
+            font-size: 1em; /* Assure une taille de police lisible */
         }
         button {
-            background-color: #5cb85c; /* Vert succès */
+            background-color: #5cb85c; 
             color: white;
             border: none;
             cursor: pointer;
             font-weight: bold;
         }
-        button.red { background-color: #d9534f; }
+        button.red { 
+            background-color: #d9534f; 
+            margin-bottom: 15px; 
+        }
         button:disabled { background-color: #aaa; cursor: not-allowed; }
         .section {
             border: 1px solid #eee;
-            padding: 15px;
-            margin-bottom: 15px;
+            padding: 10px;
+            margin-bottom: 10px;
             border-radius: 6px;
         }
-        /* Tableau des scores */
+        /* ---------------------------------------------------- */
+        /* TABLES RESPONSIVE */
+        /* ---------------------------------------------------- */
+        /* Conteneur de défilement pour les tableaux */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
         .score-table, .bidding-summary {
             width: 100%;
+            min-width: 300px; /* Assure une largeur minimale */
             border-collapse: collapse;
             margin-top: 15px;
+            table-layout: fixed; /* Fixe la disposition pour mieux gérer les largeurs */
         }
+        /* Largeurs spécifiques pour les colonnes du tableau des scores */
+        #score-table thead tr th:nth-child(1) { width: 15%; } /* Rang */
+        #score-table thead tr th:nth-child(2) { width: 55%; } /* Joueur */
+        #score-table thead tr th:nth-child(3) { width: 30%; } /* Total */
+
         .score-table th, .score-table td, .bidding-summary th, .bidding-summary td {
             border: 1px solid #ddd;
-            padding: 10px 5px;
+            padding: 8px 3px; /* Padding réduit pour plus de place */
             text-align: center;
+            overflow: hidden;
+            white-space: nowrap; /* Empêche les retours à la ligne */
+            text-overflow: ellipsis; /* Ajoute des points de suspension si le texte est tronqué */
         }
         .score-table th, .bidding-summary th {
             background-color: #f2f2f2;
         }
-        /* Ligne cliquable pour la saisie des résultats */
-        .result-player-row {
-            cursor: pointer;
-            background-color: #fff;
-        }
-        .result-player-row:hover {
-            background-color: #f9f9f9;
-        }
-        .result-player-row.completed {
-            background-color: #eafaea; /* Vert clair si validé */
-        }
-
         /* ---------------------------------------------------- */
         /* MODAL (POUR SAISIE D'UN JOUEUR) */
         /* ---------------------------------------------------- */
@@ -95,27 +106,29 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8); 
             display: none;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Place le modal en haut pour éviter qu'il soit coupé par le clavier */
             z-index: 1000;
+            padding-top: 20px;
         }
         .modal-content {
             background: white;
-            padding: 20px;
+            padding: 15px;
             border-radius: 8px;
-            max-width: 90%;
-            max-height: 90%;
+            width: 95%; 
+            max-width: 500px; 
+            max-height: 90vh; 
             overflow-y: auto;
             position: relative;
             box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
         .modal-close {
             position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 24px;
+            top: 5px;
+            right: 10px;
+            font-size: 28px; 
             font-weight: bold;
             cursor: pointer;
             color: #d9534f;
@@ -133,14 +146,36 @@
         }
         .bonus-field label {
             flex-grow: 1;
+            font-size: 0.95em;
         }
         .bonus-field input[type="number"] {
-            width: 50px;
+            width: 55px; 
             text-align: center;
+            padding: 5px;
         }
         .rascal-options label {
-            margin-right: 15px;
+            margin-right: 10px;
             font-weight: normal;
+            display: inline-block; 
+        }
+        .kraken-box {
+            background-color: #ffcccc; 
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        /* ---------------------------------------------------- */
+        /* CRÉDITS */
+        /* ---------------------------------------------------- */
+        .credits {
+            text-align: center;
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 20px;
+        }
+        .credits a {
+            color: #d9534f;
+            text-decoration: none;
         }
     </style>
 </head>
@@ -163,13 +198,15 @@
 
     <div id="score-screen" style="display:none;">
         <h2 id="current-manche">Manche 1 / 10</h2>
-        <table id="score-table" class="score-table">
-            <thead>
-                <tr><th>Joueur</th><th>Total</th></tr>
-            </thead>
-            <tbody>
-                </tbody>
-        </table>
+        <div class="table-responsive">
+            <table id="score-table" class="score-table">
+                <thead>
+                    <tr><th>Rang</th><th>Joueur</th><th>Total</th></tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+        </div>
         <button onclick="startBidding()">Démarrer les paris</button>
     </div>
 
@@ -183,6 +220,13 @@
 
     <div id="results-screen" style="display:none;">
         <h2>Saisie des Résultats (Manche <span id="manche-num-result"></span>)</h2>
+        
+        <div class="kraken-box">
+             <label>
+                <input type="checkbox" id="kraken-used" onchange="checkTotalPlisValidation()"> Le **Kraken** a été joué cette manche ?
+            </label>
+        </div>
+
         <p>Cliquez sur un joueur pour saisir ses plis et bonus.</p>
         <table class="bidding-summary">
             <thead>
@@ -191,10 +235,19 @@
             <tbody id="results-summary-body">
                 </tbody>
         </table>
+        
+        <button onclick="goToBidding()" class="red">
+            Modifier les paris de la manche
+        </button>
+        
         <button id="calculate-scores-btn" onclick="calculateScores()" disabled>Calculer et Terminer la Manche</button>
     </div>
 </div>
 
+<div class="credits">
+    Conçu par GDD. 
+    Gemini agissant ici comme assistant de développement pour GDD.
+</div>
 <div id="player-details-modal" class="modal-overlay" onclick="closeModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
         <span class="modal-close" onclick="closeModal(null)">&times;</span>
@@ -284,12 +337,16 @@
 
     /** Sauvegarde l'état actuel du jeu dans localStorage. */
     function saveGame() {
+        // Enregistrement de l'état du Kraken dans la sauvegarde
+        const krakenUsed = document.getElementById('kraken-used') ? document.getElementById('kraken-used').checked : false;
+        
         const gameState = {
             players: players,
             currentManche: currentManche,
             scores: scores,
-            roundResults: roundResults, // Sauvegarder les résultats temporaires aussi
-            bids: bids // Le pari initial de la manche
+            roundResults: roundResults, 
+            bids: bids,
+            krakenUsed: krakenUsed // Sauvegarde l'état du Kraken
         };
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(gameState));
     }
@@ -316,7 +373,12 @@
                  // Si les paris sont validés, aller aux résultats
                 document.getElementById('setup-screen').style.display = 'none';
                 document.getElementById('results-screen').style.display = 'block';
+                // Restauration de l'état du Kraken
+                if (document.getElementById('kraken-used')) {
+                     document.getElementById('kraken-used').checked = gameState.krakenUsed || false;
+                }
                 setupResultsSummary();
+                checkTotalPlisValidation(); 
             } else {
                 // Sinon, retourner à l'écran des scores pour la nouvelle manche
                 document.getElementById('setup-screen').style.display = 'none';
@@ -382,39 +444,98 @@
         document.getElementById('setup-screen').style.display = 'none';
         document.getElementById('score-screen').style.display = 'block';
         updateScoreTable();
-        saveGame(); // Sauvegarde le jeu initial
+        saveGame(); 
     }
 
     // --- Fonctions de Navigation et d'Affichage ---
 
-    /** Met à jour l'affichage du tableau des scores. */
+    /** Met à jour l'affichage du tableau des scores, trié par score total décroissant. */
     function updateScoreTable() {
+        
+        // --- 1. Préparation de l'affichage de la manche ---
+        
         if (currentManche > MAX_MANCHES) {
             document.getElementById('current-manche').textContent = `Partie Terminée : ${MAX_MANCHES} Manches !`;
-            document.querySelector('#score-screen button').textContent = "Afficher le gagnant";
+            document.querySelector('#score-screen button').textContent = "Afficher le Gagnant (Partie Terminée)";
         } else {
             document.getElementById('current-manche').textContent = `Manche ${currentManche} / ${MAX_MANCHES}`;
             document.querySelector('#score-screen button').textContent = "Démarrer les paris";
         }
         
+        // --- 2. Création de la liste des joueurs avec leurs scores totaux ---
+        
+        const leaderboard = players.map(name => {
+            const totalScore = scores[name].reduce((a, b) => a + b, 0);
+            return { name: name, score: totalScore };
+        });
+
+        // --- 3. TRI du tableau des scores (Ordre Décroissant) ---
+        
+        // 'b.score - a.score' pour le tri décroissant (meilleur score en premier)
+        leaderboard.sort((a, b) => b.score - a.score); 
+
+        // --- 4. Affichage du tableau HTML ---
+        
         const tbody = document.querySelector('#score-table tbody');
         tbody.innerHTML = '';
-        players.forEach(name => {
-            const totalScore = scores[name].reduce((a, b) => a + b, 0);
-            const row = tbody.insertRow(); // CORRECTION: Utilisation de insertRow()
-            row.insertCell().textContent = name;
-            row.insertCell().textContent = totalScore;
+        let rank = 1;
+        let lastScore = null;
+        
+        leaderboard.forEach((playerData, index) => {
+            
+            // Gérer les ex aequo pour l'affichage du rang
+            if (playerData.score !== lastScore) {
+                rank = index + 1;
+            }
+            lastScore = playerData.score;
+            
+            const row = tbody.insertRow(); 
+            // Ajout des cellules Rang, Nom, Score Total
+            row.insertCell().textContent = rank;
+            row.insertCell().textContent = playerData.name;
+            row.insertCell().textContent = playerData.score;
+            
+            // Mise en évidence du gagnant (ou des gagnants ex aequo) après la fin de la partie
+            if (currentManche > MAX_MANCHES && rank === 1) {
+                row.style.backgroundColor = '#dff0d8'; // Vert clair
+                row.style.fontWeight = 'bold';
+            }
         });
+        
+        // L'en-tête du tableau est maintenant statique dans le HTML
     }
 
-    /** Affiche l'écran des paris. */
-    function startBidding() {
+    /** Permet de revenir à l'écran des paris depuis les résultats */
+    function goToBidding() {
+        if (!confirm("Attention : Revenir à la saisie des paris annulera toutes les saisies de plis et bonus de cette manche. Les résultats devront être saisis à nouveau. Continuer ?")) {
+            return;
+        }
+
+        // Basculer d'écran
+        document.getElementById('results-screen').style.display = 'none';
+
+        // Appel de startBidding en mode révision
+        startBidding(true); 
+        saveGame();
+    }
+
+    /** * Affiche l'écran des paris. 
+     * @param {boolean} isRevisiting - Indique si on est en mode modification.
+     */
+    function startBidding(isRevisiting = false) {
         if (currentManche > MAX_MANCHES) {
             alert("La partie est terminée !");
             return;
         }
 
-        document.getElementById('score-screen').style.display = 'none';
+        if (!isRevisiting) {
+            document.getElementById('score-screen').style.display = 'none';
+        } else {
+            // Si on revient en arrière, on réinitialise l'état de validation des résultats et le Kraken
+            roundResults = {}; 
+            document.getElementById('kraken-used').checked = false;
+        }
+        
         document.getElementById('bidding-screen').style.display = 'block';
 
         const maxPlis = currentManche;
@@ -423,11 +544,14 @@
         container.innerHTML = '';
 
         players.forEach(name => {
+            // Pré-remplit le champ avec le pari actuel, sinon 0
+            const currentBid = bids[name] !== undefined ? bids[name] : 0; 
+
             const div = document.createElement('div');
             div.className = 'player-input';
             div.innerHTML = `
                 <label for="bid-${name}">${name} :</label>
-                <input type="number" id="bid-${name}" value="0" min="0" max="${maxPlis}" class="input-field">
+                <input type="number" id="bid-${name}" value="${currentBid}" min="0" max="${maxPlis}" class="input-field">
             `;
             container.appendChild(div);
         });
@@ -437,8 +561,8 @@
 
     /** Valide les paris et passe à l'écran de résultats. */
     function validateBids() {
-        bids = {}; // Réinitialise les paris pour la manche
-        roundResults = {}; // Réinitialise les résultats temporaires
+        bids = {}; 
+        roundResults = {}; 
         let allValid = true;
         const maxPlis = currentManche;
 
@@ -451,13 +575,13 @@
                 allValid = false;
             } else {
                 bids[name] = bidValue;
-                // Initialisation des résultats temporaires (avec le pari initial)
+                // Initialisation des résultats temporaires
                 roundResults[name] = { 
-                    bid: bidValue, // Initialement, le pari est le pari initial
+                    bid: bidValue, 
                     plis: null, 
                     rascal: null, 
                     bonus: null,
-                    harryUsed: false // Harry est initialisé à faux
+                    harryUsed: false 
                 };
             }
         });
@@ -466,7 +590,8 @@
             document.getElementById('bidding-screen').style.display = 'none';
             document.getElementById('results-screen').style.display = 'block';
             setupResultsSummary();
-            saveGame(); // Sauvegarde après validation des paris
+            checkTotalPlisValidation(); 
+            saveGame(); 
         }
     }
     
@@ -479,9 +604,8 @@
 
         players.forEach(name => {
             const result = roundResults[name];
-            // Le pari affiché est celui actuellement stocké dans roundResults (peut être modifié par Harry)
-            const displayBid = result.bid !== undefined ? result.bid : bids[name]; 
-            const isCompleted = result.plis !== null && result.bonus !== null;
+            const displayBid = result && result.bid !== undefined ? result.bid : bids[name]; 
+            const isCompleted = result && result.plis !== null && result.bonus !== null;
             
             if (!isCompleted) {
                 allCompleted = false;
@@ -492,7 +616,7 @@
             row.onclick = () => openPlayerModal(name);
 
             row.insertCell().textContent = name;
-            row.insertCell().textContent = displayBid; // Affiche le pari potentiellement modifié
+            row.insertCell().textContent = displayBid; 
             row.insertCell().innerHTML = isCompleted ? `✅ ${result.plis} plis` : '❌ Cliquable pour saisir';
         });
 
@@ -513,35 +637,36 @@
         const result = roundResults[name];
         
         // Plis
-        document.getElementById('modal-plis-realises').value = result.plis !== null ? result.plis : 0;
+        document.getElementById('modal-plis-realises').value = result && result.plis !== null ? result.plis : 0;
 
         // Harry le Géant
-        const initialBid = bids[name]; // Le pari initial (avant l'effet Harry)
+        const initialBid = bids[name]; 
         
-        document.getElementById('modal-harry-used').checked = result.harryUsed;
+        document.getElementById('modal-harry-used').checked = result && result.harryUsed;
         document.getElementById('harry-initial-bid').textContent = initialBid;
         
-        // Configuration du champ de pari final Harry: Min/Max selon le pari initial
         const harryFinalBidInput = document.getElementById('modal-harry-final-bid');
         harryFinalBidInput.min = Math.max(0, initialBid - 1);
         harryFinalBidInput.max = Math.min(maxPlis, initialBid + 1);
-        
-        // La valeur affichée est le pari actuel (bid) stocké dans roundResults
-        harryFinalBidInput.value = result.bid; 
+        harryFinalBidInput.value = result && result.bid !== undefined ? result.bid : initialBid; 
         
         toggleHarryOptions();
 
         // Rascal
-        const rascalUsed = result.rascal !== null;
+        const rascalUsed = result && result.rascal !== null;
         document.getElementById('modal-rascal-used').checked = rascalUsed;
         toggleRascalOptions();
         if (rascalUsed && result.rascal !== false) {
-            const radio = document.querySelector(`input[name="modal-rascal-bid"][value="${result.rascal}"]`);
-            if (radio) radio.checked = true;
+            const radio = document.querySelector(`input[name="modal-rascal-bid"]:checked`);
+            if (radio && parseInt(radio.value) !== result.rascal) {
+                 // S'assurer que le bouton radio correct est coché si le Rascal a été utilisé
+                 const correctRadio = document.querySelector(`input[name="modal-rascal-bid"][value="${result.rascal}"]`);
+                 if(correctRadio) correctRadio.checked = true;
+            }
         }
 
         // Bonus
-        const b = result.bonus || {};
+        const b = result && result.bonus || {};
         document.getElementById('modal-b14s').value = b.b14s || 0;
         document.getElementById('modal-b14n').value = b.b14n || 0;
         document.getElementById('modal-bbourse').value = b.bbourse || 0;
@@ -565,7 +690,6 @@
         const optionsDiv = document.getElementById('modal-harry-options');
         optionsDiv.style.display = checkbox.checked ? 'block' : 'none';
         
-        // Désactive la modification du pari final si Harry n'est pas coché
         document.getElementById('modal-harry-final-bid').disabled = !checkbox.checked;
     }
 
@@ -583,7 +707,6 @@
         const rascalUsed = document.getElementById('modal-rascal-used').checked;
         const harryUsed = document.getElementById('modal-harry-used').checked;
         
-        // Stockage du Rascal
         let rascalValue = null;
         if (rascalUsed) {
             const rascalBid = document.querySelector('input[name="modal-rascal-bid"]:checked');
@@ -592,25 +715,22 @@
             rascalValue = false;
         }
 
-        // MODIFICATION DU PARI FINAL SI HARRY EST JOUÉ
-        let finalBid = bids[name]; // Le pari initial
+        let finalBid = bids[name]; 
         if (harryUsed) {
             const harryInput = document.getElementById('modal-harry-final-bid');
             const modifiedBid = parseInt(harryInput.value);
 
-            // Vérification des limites de modification (+/- 1 du pari initial)
             const initialBid = bids[name];
             const minAllowed = Math.max(0, initialBid - 1);
             const maxAllowed = Math.min(currentManche, initialBid + 1);
 
             if (modifiedBid >= minAllowed && modifiedBid <= maxAllowed) {
-                finalBid = modifiedBid; // Pari modifié par Harry
+                finalBid = modifiedBid; 
             } else {
                 alert(`Erreur: Le pari final pour Harry doit être entre ${minAllowed} et ${maxAllowed}. Le pari n'a pas été modifié.`);
             }
         }
         
-        // Stockage des Bonus
         const bonus = {
             b14s: parseInt(document.getElementById('modal-b14s').value) || 0,
             b14n: parseInt(document.getElementById('modal-b14n').value) || 0,
@@ -621,44 +741,54 @@
         };
 
         // Mise à jour de roundResults
+        roundResults[name] = roundResults[name] || {};
         roundResults[name].plis = plis;
         roundResults[name].rascal = rascalValue;
         roundResults[name].bonus = bonus;
         roundResults[name].harryUsed = harryUsed;
-        roundResults[name].bid = finalBid; // LE PARI UTILISÉ POUR LE CALCUL EST MIS À JOUR
+        roundResults[name].bid = finalBid; 
 
         closeModal(null);
-        setupResultsSummary(); // Rafraîchit l'écran de résumé
-        checkTotalPlisValidation(); // Lance la vérification des plis
-        saveGame(); // Sauvegarde l'état temporaire
+        setupResultsSummary(); 
+        checkTotalPlisValidation(); 
+        saveGame(); 
     }
     
-    /** Vérifie si le total des plis réalisés correspond au numéro de la manche. */
+    /** Vérifie si le total des plis réalisés correspond au numéro de la manche, ajusté par le Kraken. */
     function checkTotalPlisValidation() {
-        let totalPlis = 0;
+        let totalPlisRealises = 0;
         let allPlisEntered = true;
 
         players.forEach(name => {
-            if (roundResults[name].plis !== null) {
-                totalPlis += roundResults[name].plis;
+            if (roundResults[name] && roundResults[name].plis !== null) {
+                totalPlisRealises += roundResults[name].plis;
             } else {
                 allPlisEntered = false;
             }
         });
 
-        const manche = currentManche;
+        // Ajustement pour le Kraken
+        const krakenElement = document.getElementById('kraken-used');
+        const krakenUsed = krakenElement ? krakenElement.checked : false;
+        const plisAttendus = currentManche - (krakenUsed ? 1 : 0);
+        
         const calculateButton = document.getElementById('calculate-scores-btn');
 
-        if (totalPlis === manche && allPlisEntered) {
-            calculateButton.disabled = false;
-            calculateButton.textContent = `Calculer les scores de la Manche ${manche}`;
-        } else if (!allPlisEntered) {
-            calculateButton.disabled = true;
-            calculateButton.textContent = 'Saisir tous les résultats avant de calculer';
+        // La validation finale de l'étape de résultats n'a lieu que si tous les joueurs ont été saisis.
+        if (allPlisEntered) {
+            if (totalPlisRealises === plisAttendus) {
+                calculateButton.disabled = false;
+                calculateButton.textContent = `Calculer les scores de la Manche ${currentManche}`;
+            } else {
+                calculateButton.disabled = true;
+                calculateButton.textContent = `Total plis: ${totalPlisRealises}/${plisAttendus}. Le total doit être exact.`;
+            }
         } else {
-            calculateButton.disabled = true;
-            calculateButton.textContent = `Total plis: ${totalPlis}/${manche}. Le total doit être exact.`;
+             calculateButton.disabled = true;
+             calculateButton.textContent = 'Saisir tous les résultats avant de calculer';
         }
+        
+        saveGame(); // Sauve l'état du Kraken
     }
 
     // --- Logique de Calcul des Scores ---
@@ -670,7 +800,6 @@
         
         players.forEach(name => {
             const data = roundResults[name];
-            // Utilise le pari potentiellement modifié (Harry)
             const pari = data.bid; 
             const fait = data.plis;
             let scoreBase = 0;
@@ -692,8 +821,14 @@
                 }
             } else {
                 // Pari raté
-                const difference = Math.abs(pari - fait);
-                scoreBase = difference * -10;
+                if (pari === 0) {
+                    // CORRECTION ERREUR 1: Pari 0 raté
+                    scoreBase = currentManche * -10; // Pénalité: -10 points par carte
+                } else {
+                    // Pari > 0 raté
+                    const difference = Math.abs(pari - fait);
+                    scoreBase = difference * -10; // Pénalité: -10 points par écart
+                }
             }
 
             // -----------------------------------------------------------------
@@ -702,9 +837,9 @@
             if (data.rascal !== false) {
                 const mise = data.rascal;
                 if (contratReussi) {
-                    rascalScore = mise; // Pari réussi : AJOUTE la mise
+                    rascalScore = mise; 
                 } else {
-                    rascalScore = -mise; // Pari raté : SOUSTRAIT la mise
+                    rascalScore = -mise; 
                 }
             }
             
@@ -717,6 +852,7 @@
                 bonusScore += b.b14s * 10;
                 bonusScore += b.b14n * 20;
                 
+                // La bourse n'est pas un pli, elle est seulement un bonus de capture.
                 bonusScore += b.bbourse * 20; 
                 
                 bonusScore += b.bpirate * 30; 
@@ -732,15 +868,15 @@
 
             // Enregistrement et résumé
             scores[name].push(totalMancheScore);
-            summary += `${name} : ${totalMancheScore} points (Pari final: ${pari}, Plis: ${fait}, Base: ${scoreBase}, Bonus: ${bonusScore}, Rascal: ${rascalScore})\n`;
+            summary += `${name} : ${totalMancheScore} points (Pari: ${pari}, Plis: ${fait}, Base: ${scoreBase}, Bonus: ${bonusScore}, Rascal: ${rascalScore})\n`;
         });
 
         alert(summary);
 
         // Préparation pour la manche suivante
         currentManche++;
-        bids = {}; // Réinitialise les paris pour la prochaine manche
-        roundResults = {}; // Réinitialise les résultats temporaires
+        bids = {}; 
+        roundResults = {}; 
         
         document.getElementById('results-screen').style.display = 'none';
         document.getElementById('score-screen').style.display = 'block';
